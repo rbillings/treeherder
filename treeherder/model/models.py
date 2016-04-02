@@ -561,7 +561,7 @@ class FailureLine(models.Model):
     id = BigAutoField(primary_key=True)
     job_guid = models.CharField(max_length=50)
     repository = models.ForeignKey(Repository)
-    action = models.CharField(max_length=11, choices=ACTION_CHOICES)
+    action = models.CharField(max_length=11, choices=ACTION_CHOICES, db_index=True)
     line = models.PositiveIntegerField()
     test = models.TextField(blank=True, null=True)
     subtest = models.TextField(blank=True, null=True)
@@ -597,7 +597,8 @@ class FailureLine(models.Model):
             ('job_guid', 'line')
         )
         index_together = (
-            ('job_guid', 'repository')
+            ('job_guid', 'repository'),
+            ('test', 'subtest', 'status', 'expected')
         )
 
     def best_automatic_match(self, min_score=0):
