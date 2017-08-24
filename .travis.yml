@@ -192,6 +192,7 @@ matrix:
         - export PATH=$HOME/.yarn/bin:$PATH
       install:
         - pip install --disable-pip-version-check --require-hashes -r requirements/common.txt -r requirements/dev.txt
+        - pip install -r tests/selenium/requirements.txt
         - yarn install --frozen-lockfile --no-bin-links
       before_script:
         - while ! curl "$ELASTICSEARCH_URL" &> /dev/null; do sleep 1; done
