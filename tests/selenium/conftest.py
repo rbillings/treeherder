@@ -1,6 +1,11 @@
 import pytest
 
 
+@pytest.fixture(scope='session')
+def base_url(base_url, request):
+    return base_url or request.getfixturevalue("live_server").url
+
+
 @pytest.fixture
 def capabilities(request, capabilities):
     driver = request.config.getoption('driver')
