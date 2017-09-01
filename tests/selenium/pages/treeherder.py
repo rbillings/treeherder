@@ -1,5 +1,6 @@
 import itertools
 import random
+import time
 
 from pypom import Page, Region
 from selenium.webdriver.common.by import By
@@ -252,6 +253,7 @@ class TreeherderPage(Base):
         # Fix me: https://github.com/mozilla/treeherder-tests/issues/43
         self.open_repos_menu()
         self.find_element(*self._mozilla_central_repo_locator).click()
+        time.sleep(1)
         self.wait_for_page_to_load()
 
     def select_next_job(self):
